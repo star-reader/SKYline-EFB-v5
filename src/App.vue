@@ -88,24 +88,6 @@ watch:{
            e.preventDefault();
         }
     }, false);
-    document.onkeydown = function() {  
-        var e = window.event || arguments[0];  
-        //屏蔽F12  
-        if(e.keyCode == 123) {  
-            //return false;  
-            //屏蔽Ctrl+Shift+I  
-        } else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)) {  
-            //return false;  
-            //屏蔽Shift+F10  
-        } else if((e.shiftKey) && (e.keyCode == 121)){  
-            //return false;  
-        }  
-    };  
-    
-    //屏蔽右键单击  
-    document.oncontextmenu = function() {  
-        //return false;  
-    } 
     this.checkUpdate()
     if (localStorage.getItem('user_certificate') != null){
       this.loginStatus = true
@@ -141,16 +123,16 @@ watch:{
   },
   methods: {
     isNightMode(){
-			let d = localStorage.getItem('nightMode')
-			if (d == null){
-				localStorage.setItem('nightMode','false')
-				return 'day-mode'
-			}else if (d == 'true'){
-				return 'night-mode'
-			}else if (d == 'false'){
-				return 'day-mode'
-			}
-		},
+	let d = localStorage.getItem('nightMode')
+	if (d == null){
+		localStorage.setItem('nightMode','false')
+		return 'day-mode'
+	}else if (d == 'true'){
+		return 'night-mode'
+	}else if (d == 'false'){
+		return 'day-mode'
+	}
+    },
     checkOldUrl(){
       const url = window.location.href
         if (url.indexOf('#') != -1){
@@ -169,35 +151,8 @@ watch:{
       }, 1500000);
     },
     checkValidUser(){
-      if (localStorage.getItem('user_certificate') == null){
-        //用户数据啥也没有
-        this.$router.push('/Login')
-      }else{
-        //生成token
-        this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/token?user_certificate=${localStorage.getItem('user_certificate')}`).then(res => {
-          if (res.data.access_token){
-            localStorage.setItem('access_token',res.data.access_token)
-            this.loadUserInfo()
-            this.refreshToken()
-          }else{
-            this.$message({
-                    type: 'error',
-                    message: '登录验证失败，请重新登录~'
-                  }); 
-                  setTimeout(()=>{
-            this.$router.push('/Login')
-          },500)
-          }
-        }).catch(e =>{
-          this.$message({
-                    type: 'error',
-                    message: '登录验证失败，请重新登录~'
-                  }); 
-                  setTimeout(()=>{
-            this.$router.push('/Login')
-          },500)
-        })
-      }
+     return false
+      //隐私问题删除
     },
     loadUserInfo(halfWay){
       if (halfWay){
@@ -224,7 +179,6 @@ watch:{
                 this.$router.push('/Chart')
           }
           this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/userData`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then((res)=>{
-          //setCookie('u_og_Lc!3%e',getRandomString('24'))
           this.personalData = res.data.data
           this.pubsub.publish('personalData',this.personalData)
           if (!res.data.data.isBindAccount){
