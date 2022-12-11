@@ -512,282 +512,8 @@
         </div>
       </div>
     </div>
-	<!-- OFP详细列表 -->
 	<div style="resize: both;" class="ofp-detail">
 		<div class="close"><i class="el-icon-circle-close" @click="closeOfp"></i></div>
-		<el-tabs v-model="tabs">
-			<el-tab-pane label="飞行报告" name="report">
-				<div id="d-report">
-				  <div class="airway-outer">
-				    <div class="top-route" style="padding-left: 5%">飞行计划报告单</div>
-				    <div class="report">
-				      <div class="container">
-				        <!-- 中文 -->
-				        <br />
-				        <div class="r-title">
-				          SKYline Flyleague - 飞行计划报告单 --- {{ getDate() }} 已生成
-				          <br />
-				          仅供模拟飞行使用，请勿在现实世界使用
-				        </div>
-				        <div class="r-title">
-				          ===================================================
-				        </div>
-				        <div>== 飞行计划单开始 ==</div>
-				        <div>【数据信息】</div>
-				        <div>单位：{{runit}}</div>
-				        <br />
-				        <div>机载导航数据库：SKY_TE_R3_DATABASE</div>
-				        <br />
-				        <div>
-				          签派程序数据库：SKYline Database - AIRAC - ICAO -GEN398 -R2
-				        </div>
-				        <br />
-				        <div>数据校准：已完成 No:A3-124</div>
-				        <div class="r-title">
-				          ===================================================
-				        </div>
-				        <div>【航班信息】</div>
-				        <div>
-				          航班号 &nbsp; &nbsp; 机型 &nbsp; &nbsp; 起飞/降落 &nbsp; &nbsp;
-				          机场运行 &nbsp; &nbsp; 签派注册号
-				        </div>
-				        <div>
-				          {{ form.callsign.toUpperCase() }} &nbsp; {{ form.type }} &nbsp;
-				          {{ route.dep.icao }}/{{ route.arr.icao }} &nbsp; 正常/正常 &nbsp; S25Q-1C
-				        </div>
-				        <br />
-				        <div>航班计划航路</div>
-				        <div>{{ route.searched }}</div>
-				        <br />
-				        <div>航路里程</div>
-				        <div>{{ route.distance }}</div>
-				        <br />
-				        <div>放行时间/计划起飞时间</div>
-				        <div>..... UTC / ...... UTC</div>
-				        <br />
-				        <div>航线重要运行提示</div>
-				        <div>无/None</div>
-				        <div>
-				          ..................................
-				        </div>
-				        <div>【配载及燃油信息】</div>
-				        <div>
-				          乘客人数/重量
-				          .......................{{
-				            pass_num
-				          }}/{{ pass_weight }}
-				        </div>
-				        <div>
-				          装载货物类型
-				          ....................普通货物
-				        </div>
-				        <div>
-				          装载货物总重
-				          ....................{{
-				            load_weight
-				          }}
-				        </div>
-				
-				        <div>
-				          人货总重..........................
-				          {{ all_weight }}
-				        </div>
-				        <div>
-				          飞行器重量 ..................
-				          {{ acft_weight }}
-				        </div>
-				        <div>
-				          零燃油重量 ....................
-				          {{ zfw_weight }}
-				        </div>
-				        <br />
-				        <div>
-				          ...........................
-				        </div>
-				        <br />
-				        <div>
-				          计划添加油量 .......................
-				          {{ plan_fuel }}
-				        </div>
-				        <div>
-				          实际起飞重量 .......................
-				          {{ tkof_weight }} / MAX {{ tkof_weight_max }}
-				        </div>
-				        <div>
-				          实际燃油消耗 .......................
-				          {{ trip_fuel }}
-				        </div>
-				        <div>
-				          备用燃油量
-				          ..........................
-				          {{ rev }}
-				        </div>
-				        <div>
-				          实际着陆重量 ......................
-				          {{ land_weight }} / MAX {{ land_weight_max }}
-				        </div>
-				        <div>
-				          成本指数 .....................
-				          {{ ci }}
-				        </div>
-				        <br />
-				        <div>备注信息</div>
-				        <div>无</div>
-				        <br />
-				        <div class="r-title">
-				          =========================================
-				        </div>
-				        <div>签派员</div>
-				        <div>{{personalData.cid}}</div>
-				        <br />
-				        <div>备注信息</div>
-				        <div>航线一切顺畅，飞行愉快~</div>
-				        <br />
-				        <div class="r-title">
-				          ======================================
-				        </div>
-				        <div>== 飞行计划单结束 ==</div>
-				        <br />
-				      </div>
-				    </div>
-				    <div class="report">
-				      <div class="container">
-				        <!-- 中文 -->
-				        <br />
-				        <div class="r-title">
-				          SKYLINE FLYLEAGUE - FLIGHT PLAN --- {{ getDate() }} GENERATED
-				          <br />
-				          ONLY FOR FLIGHT SIMULATION USE, DO NOT USE IN REAL WORLD
-				        </div>
-				        <div class="r-title">
-				          =============================================
-				        </div>
-				        <div>== REPORT START ==</div>
-				        <div>【DATA INFO】</div>
-				        <div>ALL WEIGHTS IN {{runit_en}}</div>
-				        <br />
-				        <div>AIRCRAFT DATABASE：sky_TE_R3_DATABASE</div>
-				        <br />
-				        <div>
-				          DISPATCH DATABASE：SKYline Database - AIRAC - ICAO -GEN398 -R2
-				        </div>
-				        <br />
-				        <div>APPROVED：TRUE No:A3-124</div>
-				        <div class="r-title">
-				          ============================================
-				        </div>
-				        <div>【FLIGHT INFO】</div>
-				        <div>
-				          FLIGHT NUMBER &nbsp; &nbsp; AIRCRAFT &nbsp; &nbsp; FROM/TO
-				          &nbsp; &nbsp;&nbsp; &nbsp; ARPT STATUS &nbsp; &nbsp; DISPATCH
-				          REG
-				        </div>
-				        <div>
-				          {{ form.callsign.toUpperCase() }} &nbsp; {{ form.type }} &nbsp;
-				          {{ route.dep.icao }}/{{ route.arr.icao }} &nbsp; NORMAL/NORMAL &nbsp;
-				          S25Q-1C
-				        </div>
-				        <br />
-				        <div>FLIGHT PLAN ROUTE</div>
-				        <div>{{ route.searched }}</div>
-				        <br />
-				        <div>DISTANCE</div>
-				        <div>{{ route.distance }}</div>
-				        <br />
-				        <div>OFF BLOCK TIME / TAKE OFF TIME</div>
-				        <div>..... UTC / ...... UTC</div>
-				        <br />
-				        <div>ENROUTE NOTAM</div>
-				        <div>None</div>
-				        <div>
-				          ..........................
-				        </div>
-				        <div>【LOAD AHD FUEL】</div>
-				        <div>
-				          PASSENGER
-				          NUM/WEIGHT .............
-				          {{ pass_num }}/{{ pass_weight }}
-				        </div>
-				        <div>
-				          CARGO TYPE .............
-				          NORMAL CARGO
-				        </div>
-				        <div>
-				          CARGO WEIGHT
-				          .............
-				          {{ load_weight }}
-				        </div>
-				
-				        <div>
-				          TOTAL TRAFFIC WEIGHT .............
-				          {{ all_weight }}
-				        </div>
-				        <div>
-				          DRY OPERATING WEIGHT
-				          ............. {{ acft_weight }}
-				        </div>
-				        <div>
-				          ZERO FUEL WEIGHT
-				          ...............
-				          {{ zfw_weight }}
-				        </div>
-				        <br />
-				        <div>
-				          ..................
-				        </div>
-				        <br />
-				        <div>
-				          BLOCK FUEL
-				          .............
-				          {{ plan_fuel }}
-				        </div>
-				        <div>
-				          TAKE OFF FUEL ACTUAL ........
-				          {{ tkof_weight }} / MAX {{ tkof_weight_max }}
-				        </div>
-				        <div>
-				          TRIP FUEL .............
-				          {{ trip_fuel }}
-				        </div>
-				        <div>
-				          FINAL RESV
-				          ..............
-				          {{ rev }}
-				        </div>
-				        <div>
-				          LANDING FUEL ACTUAL .........
-				          {{ land_weight }} / MAX {{ land_weight_max }}
-				        </div>
-				        <div>
-				          COST INDEX
-				          ..........
-				          {{ ci }}
-				        </div>
-				        <br />
-				        <div>REMAEK</div>
-				        <div>None</div>
-				        <br />
-				        <div class="r-title">
-				          ================================
-				        </div>
-				        <div>DISPATCHER</div>
-				        <div>{{personalData.cid}}</div>
-				        <br />
-				        <div>REMARK</div>
-				        <div>Wooh! Take off~</div>
-				        <br />
-				        <div class="r-title">
-				          ==============================
-				        </div>
-				        <div>== REPORT END ==</div>
-				        <br />
-				      </div>
-				    </div>
-				    <br />
-				    <br />
-				  </div>
-				</div>
-			</el-tab-pane>
 		    <el-tab-pane v-model="tabs" label="航路信息" name="route">
 				<br>
 				<div>飞行航路：</div>
@@ -1257,24 +983,6 @@ export default {
             this.search.result = []
             this.search.self = []
             $('#search-result-panel').css('display','block')
-            if(!loading){
-              $('#search-panel-load-airport').css('display','none')
-            }else{
-              $('#search-panel-load-airport').css('display','block')
-            }
-            $('.chart-main-list').css('display','none')
-            for (let i in this.worldArpt){
-                let d = this.worldArpt[i]
-                if (d.icao_code.indexOf(s.toUpperCase()) != -1 || getAirportName(d.icao_code,d.presentation_text).indexOf(s.toUpperCase()) != -1){
-                    this.search.result.push(d)
-                }
-            }
-            for (let i in this.user.chart){
-                let d = this.user.chart[i]
-                if (d.icao.indexOf(s.toUpperCase()) != -1 || d.label.indexOf(s.toUpperCase()) != -1){
-                    this.search.self.push(d)
-                }
-            }
             if (!this.search.result.length && !this.search.self.length){
                 $('#empty-result-airport').css('display','block')
             }else{
@@ -1282,42 +990,6 @@ export default {
             }
             //发送请求数据
             this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/search?searchWord=${s}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
-
-              this.search.wpt = res.data.dataRaw.waypoints
-              this.search.navid = res.data.dataRaw.navaids
-              this.search.airway = res.data.dataRaw.airways
-              this.search.airspace = res.data.dataRaw.airspace
-              this.search.restrict = res.data.dataRaw.restriction
-              $('#search-panel-load-waypoint').css('display','none')
-              $('#search-panel-load-navdata').css('display','none')
-              $('#search-panel-load-airway').css('display','none')
-              $('#search-panel-load-airspace').css('display','none')
-              $('#search-panel-load-restrict').css('display','none')
-              if (!this.search.wpt.length){
-              $('#empty-result-waypoint').css('display','block')
-              }else{
-                  $('#empty-result-waypoint').css('display','none')
-              }
-              if (!this.search.navid.length){
-              $('#empty-result-navdata').css('display','block')
-              }else{
-                  $('#empty-result-navdata').css('display','none')
-              }
-              if (!this.search.airway.length){
-              $('#empty-result-airway').css('display','block')
-              }else{
-                  $('#empty-result-airway').css('display','none')
-              }
-              if (!this.search.airspace.length){
-              $('#empty-result-airspace').css('display','block')
-              }else{
-                  $('#empty-result-airspace').css('display','none')
-              }
-              if (!this.search.restrict.length){
-              $('#empty-result-restrict').css('display','block')
-              }else{
-                  $('#empty-result-restrict').css('display','none')
-              }
               if (loading){
                 this.search.result = res.data.airports
                 $('#search-panel-load-airport').css('display','none')
@@ -1341,29 +1013,9 @@ export default {
             this.search.self = []
             let lat = parseFloat(e.split('LatLng(')[1].split(', ')[0].trim())
             let lng = parseFloat(e.split(', ')[1].split(')')[0])
-            //修复lng
-            let orlat = lat
-            let orlng = lng
-            if (lng < 0){
-                lng = lng + 360
-            }
-            if (lng > 180){
-                let t = Math.floor(lng / 180)
-                lng = lng - t*360
-            }
             this.search_layer.push(this.L.circle([orlat, orlng], { radius: 73000, color: "#00CD00", fillColor: "#00EE00", fillOpacity: 0.15 }))
             this.e_map.addLayer(this.L.layerGroup(this.search_layer))
             $('#search-result-panel').css('display','block')
-            if(!loading){
-              $('#search-panel-load-airport').css('display','none')
-            }else{
-              $('#search-panel-load-airport').css('display','block')
-            }
-            $('#search-panel-load-waypoint').css('display','block')
-            $('#search-panel-load-navdata').css('display','block')
-            $('#search-panel-load-airway').css('display','block')
-            $('#search-panel-load-airspace').css('display','block')
-            $('#search-panel-load-restrict').css('display','block')
             //$('.search-box').css('display','none')
             $('.chart-main-list').css('display','none')
             for (let i in this.worldArpt){
@@ -1379,41 +1031,6 @@ export default {
             }
             //发送请求数据
             this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/rightclick?lat=${lat}&lng=${lng}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
-              this.search.wpt = res.data.dataRaw.waypoints
-              this.search.navid = res.data.dataRaw.navaids
-              this.search.airway = res.data.dataRaw.airways
-              this.search.airspace = res.data.dataRaw.airspace
-              this.search.restrict = res.data.dataRaw.restriction
-              $('#search-panel-load-waypoint').css('display','none')
-              $('#search-panel-load-navdata').css('display','none')
-              $('#search-panel-load-airway').css('display','none')
-              $('#search-panel-load-airspace').css('display','none')
-              $('#search-panel-load-restrict').css('display','none')
-              if (!this.search.wpt.length){
-              $('#empty-result-waypoint').css('display','block')
-              }else{
-                  $('#empty-result-waypoint').css('display','none')
-              }
-              if (!this.search.navid.length){
-              $('#empty-result-navdata').css('display','block')
-              }else{
-                  $('#empty-result-navdata').css('display','none')
-              }
-              if (!this.search.airway.length){
-              $('#empty-result-airway').css('display','block')
-              }else{
-                  $('#empty-result-airway').css('display','none')
-              }
-              if (!this.search.airspace.length){
-              $('#empty-result-airspace').css('display','block')
-              }else{
-                  $('#empty-result-airspace').css('display','none')
-              }
-              if (!this.search.restrict.length){
-              $('#empty-result-restrict').css('display','block')
-              }else{
-                  $('#empty-result-restrict').css('display','none')
-              }
               if (loading){
                 this.search.result = res.data.dataRaw.airports
                 $('#search-panel-load-airport').css('display','none')
@@ -1460,46 +1077,7 @@ export default {
             let r = res.data
             let resdata = JSON.parse(dataDecrypt(r.slice(10,r.length)));
               for (let i = 0; i < resdata.length; i++) {
-                if (this.form.type == resdata[i].type) {
-                  let d = resdata[i];
-                  //乘客信息
-                  if (this.form.passenger == "") {
-                    this.pass_num = this.getRandom(130, 40);
-                    this.pass_weight = parseInt(this.pass_num) * 65;
-                  } else {
-                    this.pass_num = parseInt(this.form.passenger);
-                    this.pass_weight = parseInt(this.pass_num) * 60;
-                  }
-                  //配载信息
-                  if (this.form.load == "") {
-                    this.load_weight = this.getRandom(d.load[0], d.load[1]);
-                  } else if (this.form.load > d.load[1]) {
-                    //输入值超过最大配载
-                    this.load_weight = d.load[1];
-                  }else {
-                    this.load_weight = (parseFloat(this.form.load)*1000).toFixed(1)
-                  }
-                  this.all_weight = this.pass_weight + parseInt(this.load_weight);
-                  this.acft_weight = d.weight;
-                  this.zfw_weight = parseInt(this.acft_weight) + this.all_weight;
-                  if (this.form.ci == "") {
-                    this.ci = this.getRandom(70, 40);
-                  } else {
-                    if (this.form.ci < 20){
-                      this.ci = 20
-                    }else if (this.form.ci > 100){
-                      this.ci = 100
-                    }else {
-                       this.ci = this.form.ci;
-                    }
-                   
-                  }
-                  //燃油信息
-                  let init_fuel = parseInt(
-                    parseFloat(d.init) +
-                      parseFloat(d.each) * parseFloat(this.route.distance)
-                  );
-                  let cn_c = this.ci - 50
+                  let cn_c = resdata.ci - 50
                   if (cn_c < 0){
                     init_fuel = parseInt(init_fuel - ((-cn_c)*2) )
                   }else{
@@ -1518,11 +1096,6 @@ export default {
                     
                   }
                   this.plan_fuel = init_fuel;
-                  this.trip_fuel = init_fuel - parseInt(this.rev);
-                  this.tkof_weight =
-                    parseInt(this.zfw_weight) + parseInt(init_fuel);
-                  this.land_weight =
-                    parseInt(this.tkof_weight) - parseInt(this.trip_fuel);
                   this.tkof_weight_max = d.maxtk;
                   this.land_weight_max = d.maxld;
                   
@@ -1572,18 +1145,18 @@ export default {
         },
 		//航图阅读器操作
         mapZoomIn() {
-			let c = document.getElementById("canvas");
-			if (c != null || c != undefined) {
-				return this.$message.error('涂鸦模式下无法缩放航图');
-			}
-			this.map.setZoom(this.map.getZoom() + 1);
-		},
-		mapZoomOut() {
-			let c = document.getElementById("canvas");
-			if (c != null || c != undefined) {
-				return this.$message.error('涂鸦模式下无法缩放航图');
-			}
-			this.map.setZoom(this.map.getZoom() - 1);
+	    let c = document.getElementById("canvas");
+	    if (c != null || c != undefined) {
+		return this.$message.error('涂鸦模式下无法缩放航图');
+	    }
+	      this.map.setZoom(this.map.getZoom() + 1);
+	    },
+	mapZoomOut() {
+	    let c = document.getElementById("canvas");
+	    if (c != null || c != undefined) {
+		return this.$message.error('涂鸦模式下无法缩放航图');
+	    }
+	    this.map.setZoom(this.map.getZoom() - 1);
         },
         drawinter() {
             this.map.scrollWheelZoom.disable();
@@ -1601,57 +1174,7 @@ export default {
             canvas.setAttribute("height", `${par.clientHeight}px`);
 
             par.appendChild(canvas);
-            try {
-                const cvs = document.querySelector("canvas");
-                const ctx = cvs.getContext("2d");
-                let flag = false;
-                cvs.addEventListener("mousedown", (e) => {
-                flag = true;
-                const top = cvs.getBoundingClientRect().top;
-                const left = cvs.getBoundingClientRect().left;
-                const mouseX = e.pageX - left;
-                const mouseY = e.pageY - top;
-                ctx.strokeStyle = "#ff0000";
-                ctx.lineWidth = 8;
-                ctx.lineCap = "round";
-                ctx.beginPath();
-                ctx.moveTo(mouseX, mouseY);
-                });
-                cvs.addEventListener("mousemove", (e) => {
-                const top = cvs.getBoundingClientRect().top;
-                const left = cvs.getBoundingClientRect().left;
-                const mouseX = e.pageX - left;
-                const mouseY = e.pageY - top;
-                if (flag) {
-                    ctx.lineTo(mouseX, mouseY);
-                    // 封闭连接
-                    ctx.stroke();
-                }
-                });
-                cvs.addEventListener("mouseup", () => {
-                flag = false;
-                });
-            } catch (error) {}
-            try {
-                var can = document.getElementById("canvas");
-                var ctx = can.getContext("2d");
-                ctx.strokeStyle = "black";
-                ctx.strokeStyle = "#ff0000";
-                ctx.lineWidth = 8;
-                ctx.lineJoin = "round"; //线与线的连接方式改为圆形
-                ctx.lineCap = "round"; //起始点的绘制方式
-                var flag = false;
-                can.addEventListener("touchstart", function (evt) {
-                const top = can.getBoundingClientRect().top;
-                const left = can.getBoundingClientRect().left;
-                var x = evt.touches[0].pageX - left;
-                var y = evt.touches[0].pageY - top;
-                ctx.strokeStyle = "#ff0000";
-                ctx.lineWidth = 8;
-                ctx.beginPath();
-                ctx.moveTo(x, y);
-                flag = true;
-                });
+            
                 can.addEventListener("touchmove", function (evt) {
                 if (flag) {
                     const top = can.getBoundingClientRect().top;
@@ -1682,22 +1205,14 @@ export default {
             $('#link-warning').css('display','none')
             $('#border-warning').css('display','none')
             $('.interact').css('display','none')
-            let c = document.getElementById("canvas")
-            if (c == null || c == undefined) {
-                return
-            }
             this.map.dragging.enable()
             document.getElementById("airport-chart-viewer").removeChild(c)
         },
         enrouteChart(){
             this.closeChartViewer()
-            for (let i in this.enouteOverlayLayer){
-                this.enouteOverlayLayer[i].remove()
-            }
             this.enouteOverlayLayer = []
             this.enouteOverlayLayer = this.vectorData
             this.e_map.addLayer(this.L.layerGroup(this.enouteOverlayLayer))
-            $('.overlay').css('display','block')
             document.querySelectorAll('#enroute-chart-viewer .leaflet-overlay-pane > img')[0].style.opacity = '0.8'
             let latlngs =[this.vectorData[0]._bounds._northEast.lat,this.vectorData[0]._bounds._southWest.lng]
             this.e_map.setView(latlngs,7)
@@ -1712,9 +1227,9 @@ export default {
         chartClose(){
             for (let i in this.enouteOverlayLayer){
                 this.enouteOverlayLayer[i].remove()
-                }
-                this.enouteOverlayLayer = []
-                $('.overlay').css('display','none')
+	    }
+	    this.enouteOverlayLayer = []
+	    $('.overlay').css('display','none')
         },
         chartSet90(){
             document.querySelectorAll('#enroute-chart-viewer .leaflet-overlay-pane > img')[0].style.opacity = '0.9'
@@ -1734,100 +1249,19 @@ export default {
             document.querySelector('#enroute-chart-viewer .leaflet-tile-pane').removeAttribute('id')
         },
         drawPreview(){
-		  for (let i in this.preview.route_line){
-		    this.preview.route_line[i].remove()
-		  }
-		  this.preview.route_line = []
-		  let data = this.preview.data
-		  //筛选合适的程序
-		  let filter = []
-      let presentation = []
-		  for (let i in data){
-		    for (let j in data[i].runways){
-		      if (this.preview.value == data[i].runways[j]){
-		        filter.push(data[i].legs)
-            presentation.push(data[i].presentation_text)
-		      }
-		    }
-		  }
-      let latlngs = []
-      if (this.preview.type == '进近'){
-          for (let i in filter){
-            let num = Math.floor(Math.random() * (14 - 0 + 1) ) + 0;
-		        let color = this.colors[num]
-            let d = filter[i]
-            let isFirst = false
-            for (let j in d){
-              if (d[j].is_missed_approach){
-                //是复飞程序
-                    this.preview.route_line.push(
-                    this.L.geoJSON(JSON.parse(d[j].geometry),{color,weight:6.5,opacity:0.3,smoothFactor:3})
-                  )
-              }else{
-                if (!isFirst){
-                    isFirst = true
-                    this.preview.route_line.push(
-                      this.L.geoJSON(JSON.parse(d[j].geometry),{color,weight:6.5,smoothFactor:3}).bindTooltip(presentation[i],{
-                      permanent: true,
-                      className: "preview-tag",
-                      opacity: 0.7
-                    })
-                  )
-                }else{
-                    this.preview.route_line.push(
-                    this.L.geoJSON(JSON.parse(d[j].geometry),{color,weight:6.5,smoothFactor:3})
-                  )
-                }
-              }
-            }
-          }
-          let latlngs = JSON.parse(filter[0][0].geometry).coordinates[0]
-          this.e_map.setView([latlngs[1],latlngs[0]],11)
-      }else{
-        //开始绘制程序线条
-		  for (let i in filter){
-			let geo_data = []
-		    let num = Math.floor(Math.random() * (14 - 0 + 1) ) + 0;
-		    let color = this.colors[num]
-		    let d = filter[i]//d就是每一条程序
-			let route_name = d[0].identifier
-		    for (let j in d){
-				let geo = JSON.parse(d[j].geometry)
-		      //每一条程序经过的不同航点部分
-		      geo_data.push(geo)
-			  latlngs = [
-				  geo.coordinates[0][1],
-				  (geo.coordinates[0][0])
-			  ]
-		    }
-			this.preview.route_line.push(
-			  this.L.geoJSON(geo_data,{color:color,weight:6.5,opacity:0.8,smoothFactor:3}).bindTooltip(route_name,{
-			    permanent: true,
-			    className: "preview-tag",
-			    opacity: 0.6
-			  })
-			)
-		  }
-      this.e_map.setView(latlngs,9)
-      }
-		  document.querySelector('#enroute-chart-viewer .leaflet-tile-pane').setAttribute('id','leaflet-preview')
-		  let layergroup = this.L.layerGroup(this.preview.route_line)
-		  
-		  this.e_map.addLayer(layergroup)
-		},
+	    return this.e_map.getLayer()  
+	    },
         chartWindow(){
-			$('#airport-chart-viewer').css('display','block')
-			$('.interact').css('display','block')
-			$('.overlay').css('display','none')
-		},
+		$('#airport-chart-viewer').css('display','block')
+		$('.interact').css('display','block')
+		$('.overlay').css('display','none')
+	    },
 		//工具类
         getCenter(lat1, lng1, lat2, lng2) {
-			let lat = ((parseFloat(lat1) + parseFloat(lat2)) / 2).toFixed(4);
-			let lng = ((parseFloat(lng1) + parseFloat(lng2)) / 2).toFixed(4);
-			let latlng = [lat, lng];
-			//console.log(latlng);
-			return latlng;
-		},
+		let latlng = [lat, lng];
+		//console.log(latlng);
+		return latlng;
+	   },
         getDistance(dep_lat, dep_lng, co_lat, co_lng) {
 			let radLat1 = (dep_lat * Math.PI) / 180.0;
 			let radLat2 = (co_lat * Math.PI) / 180.0;
@@ -1861,29 +1295,7 @@ export default {
 			return this.radiansToDegrees(Math.atan2(a, b));
         },
         getComputedHeading(lat1, lng1, lat2, lng2){
-			let _heading = this.bearing(lat1, lng1, lat2, lng2);
-				if (_heading < 0) {
-				_heading += 360
-				}
-				let heading = _heading + 90;
-				if (heading > 180) {
-				heading = heading - 180
-				}
-				if (heading > 180) {
-				heading = heading - 180
-				}
-				if (heading > 180) {
-				heading = heading - 180
-				}
-				//console.log(heading)
-				let fixedHeading = heading
-				if (heading > 90 && heading < 180) {
-				fixedHeading = heading + 180
-				}
-				if (heading > 180 && heading < 270) {
-				fixedHeading = heading - 180
-				}
-				return fixedHeading
+           return this.bearing(lat1, lng1, lat2, lng2);
         },
         radiansToDegrees(radians) {
 			const degrees = radians % (2 * Math.PI);
@@ -1908,47 +1320,20 @@ export default {
         },
         getChartBound(t, e, n, i) {
 		  //获取航图边界
-		  let bottomLeftX = Math.min(t, n);
-		  let topRightX = Math.max(t, n);
-		  let bottomLeftY = Math.max(e, i);
-		  let topRightY = Math.min(e, i);
-		  return { bottomLeftX, topRightX, bottomLeftY, topRightY };
+	  let bottomLeftX = Math.min(t, n);
+	  let topRightX = Math.max(t, n);
+	  let bottomLeftY = Math.max(e, i);
+	  let topRightY = Math.min(e, i);
+	  return { bottomLeftX, topRightX, bottomLeftY, topRightY };
         },
         getVectorBorder(data){
-             let a = this.getChartBound(
+            let a = this.getChartBound(
             data[0].bbox_local[0],
             data[0].bbox_local[1],
             data[0].bbox_local[2],
             data[0].bbox_local[3]
             );
-            let s = this.getChartBound(
-            data[0].planview.bbox_local[0],
-            data[0].planview.bbox_local[1],
-            data[0].planview.bbox_local[2],
-            data[0].planview.bbox_local[3]
-            );
-            let c = s.bottomLeftX;
-            let l = a.bottomLeftY - s.bottomLeftY;
-            let u = a.topRightX - s.topRightX;
-            let h = s.topRightY;
-            let p = s.topRightX - s.bottomLeftX;
-            let d = s.bottomLeftY - s.topRightY;
-            let f = data[0].planview.bbox_geo[1] - data[0].planview.bbox_geo[3];
-            let m =
-            p / (data[0].planview.bbox_geo[2] - data[0].planview.bbox_geo[0]);
-            let g = d / f;
-            let v = c / m;
-            let y = l / g;
-            let b = u / m;
-            let _ = h / g;
-            let w = data[0].planview.bbox_geo[0] - v;
-            let x = data[0].planview.bbox_geo[1] + y;
-            let C = data[0].planview.bbox_geo[2] + b;
-            let S = data[0].planview.bbox_geo[3] - _;
-            let P = this.L.latLng(x, w);
-            let O = this.L.latLng(S, C);
-            let A = this.L.latLngBounds(P, O);
-            return A
+            return a
         },
         standardizeRoute(route){
             //匹配数字的正则表达式
@@ -1996,41 +1381,40 @@ export default {
           let s = d.getSeconds();
           return `${y}-${m}-${day} ${h}:${mi}:${s}`;
         },
-		getIcon(t) {
-			switch (t) {
+	getIcon(t) {
+	    switch (t) {
             case "arpt":
-            return "el-icon-position"
+                return "el-icon-position"
             case "sid":
-            return "el-icon-price-tag"
+                return "el-icon-price-tag"
             case "wpt":
-            return "el-icon-place"
+                return "el-icon-place"
             case "dct":
-            return "el-icon-video-play"
+                return "el-icon-video-play"
             case "awy":
-            return "el-icon-share"
+                return "el-icon-share"
             case "vor":
-            return "el-icon-aim"
+                return "el-icon-aim"
             case "ndb":
-            return "el-icon-aim"
+                return "el-icon-aim"
             case "star":
-            return "el-icon-price-tag"
+                return "el-icon-price-tag"
             default:
-            return "el-icon-place"
+                return "el-icon-place"
 			}
         },
 		fixLeafletLng(lng){
-			let data = parseFloat(lng)
-			return data < -30 ? data + 360 : data
+			return lng
 		},
-		iKnow() {
-		  document.getElementsByClassName("detail")[0].style.display = "none";
-		},
-		getRandom(max, min) {
-		  return Math.floor(Math.random() * (max - min)) + min;
-		},
-    changeWeatherChart(){
-      $('#weather-chart-insert').attr('src',this.weatherChartValue)
-    },
+	iKnow() {
+	    document.getElementsByClassName("detail")[0].style.display = "none";
+	},
+	getRandom(max, min) {
+	    return Math.floor(Math.random() * (max - min)) + min;
+	},
+	    changeWeatherChart(){
+	      $('#weather-chart-insert').attr('src',this.weatherChartValue)
+	    },
 		d_report() {
 		  $('.ofp-detail').css('display','block')
 		},
@@ -2068,13 +1452,12 @@ export default {
 			     }
 			    } 
 			  }
-			  this.pubsub.publish('newPin',this.pinBoard)
-        })
+                          })
 			})
 			this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/chartlist?airport=${this.route.arr.icao}&cycle=${this.cycle.airac}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
-			  this.exchangeToUrl(res.data).then(d =>{
-          let data = d.charts
-          for (let k in data){
+			 this.exchangeToUrl(res.data).then(d =>{
+                         let data = d.charts
+                          for (let k in data){
 			    if (data[k].std_visibility == true || data[k].cao_visibility == false){
 			      if (data[k].procedure_identifier == 'AIRPORT' ||
 			     data[k].procedure_identifier == 'AIRPORT, AIRPORT INFO, TAKE-OFF MNMS'){
@@ -2109,9 +1492,8 @@ export default {
 			      }
 			    } 
 			  }
-			  this.pubsub.publish('newPin',this.pinBoard)
-        })
-			})
+                       })
+		    })
 		},
 		d_unload() {
 		  let flag = false
@@ -2154,14 +1536,7 @@ export default {
 		    });
 		},
 		unloadTemp(){
-		  this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/unload?${new Date().getTime()}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
-		    if (res.data.msg != 'ok'){
-		      return this.$message({
-		        type: 'error',
-		        message: '貌似有些东西出错了~'
-		      });
-		    }
-		  })
+		 //api to update
 		},
 		//交互
         changeDisplay() {
@@ -2181,18 +1556,17 @@ export default {
             }
         },
         closeSelect(){
-			$('.select').css('display','none')
-			for (let i in this.select.selectLayer){
-				this.select.selectLayer[i].remove()
-			}
-			this.select.selectLayer = []
-		},
-		closeOfp(){
-			$('.ofp-detail').css('display','none')
-		},
+	  for (let i in this.select.selectLayer){
+		this.select.selectLayer[i].remove()
+	  }
+	  this.select.selectLayer = []
+	},
+	closeOfp(){
+		$('.ofp-detail').css('display','none')
+	},
 		
-		//EFB操作
-		drawUserNavData(data){
+	//EFB操作
+	drawUserNavData(data){
              for (let i in this.u_arptLayer){
                 this.u_arptLayer[i].remove()
             }
@@ -2344,21 +1718,7 @@ export default {
                 
                 }
                 }
-                if (this.e_map == undefined){
-                    setTimeout(() => {
-                        this.e_map.addLayer(this.L.layerGroup(this.u_arptLayer))
-                        this.e_map.addLayer(this.L.layerGroup(this.u_wptLayer))
-                        this.e_map.addLayer(this.L.layerGroup(this.u_wptNameLayer))
-                        this.e_map.addLayer(this.L.layerGroup(this.u_awyLayer))
-                        this.e_map.addLayer(this.L.layerGroup(this.u_awyNameLayer))
-                    }, 4000);
-                }else{
-                    this.e_map.addLayer(this.L.layerGroup(this.u_arptLayer))
-                    this.e_map.addLayer(this.L.layerGroup(this.u_wptLayer))
-                    this.e_map.addLayer(this.L.layerGroup(this.u_wptNameLayer))
-                    this.e_map.addLayer(this.L.layerGroup(this.u_awyLayer))
-                    this.e_map.addLayer(this.L.layerGroup(this.u_awyNameLayer))
-                }
+              this.e_map.addLayer(this.L.layerGroup(this.u_awyNameLayer))
            
         },
         addUserArptList(){
@@ -2426,7 +1786,7 @@ export default {
         openArptChart(d,e){
             e.cancelBubble = true
             $('.nav-left-sidebar').css('display','block')
-			      $('.report-outer').css('left','70px')
+            $('.report-outer').css('left','70px')
             this.closeSearch()
             $('.chart-main-list').css('display','block')
             $('#chart-list-load').css('display','block')
@@ -2470,19 +1830,6 @@ export default {
                     this.openChartList('arpt')
                 })   
                 })
-				this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/airportData?airport=${this.chart.target_icao}&cycle=${this.cycle.airac}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
-					let data = res.data.sqlBase64Data
-					this.prepare.search_sid = JSON.parse(JSON.parse(JSON.stringify(dataDecrypt(data.sids))))
-          this.prepare.search_star = JSON.parse(JSON.parse(JSON.stringify(dataDecrypt(data.stars))))
-					this.prepare.search_runway = JSON.parse(JSON.parse(JSON.stringify(dataDecrypt(data.runways))))
-					this.prepare.search_app = JSON.parse(JSON.parse(JSON.stringify(dataDecrypt(data.apps))))
-				})
-				// this.$axios.get(`https://api.skylineflyleague.cn/efb_api/getAirportData?requireType=star&tempToken=${this.api.temp}&Airport=${this.chart.target_icao}&Access_Token=${this.Access_Token}&User_Certificate=${this.User_Certificate}&Singnature_Id=${this.Singnature_Id}&Temp_Key=${this.Temp_Key}&Expire_At=${localStorage.getItem('tempKeyExpireTime')}&verify=RSA_2048`).then(res =>{
-				// 	let r = res.data
-				// 	let data = JSON.parse(JSON.parse(JSON.stringify(dataDecrypt(r.slice(10,r.length)))))
-				// 	this.prepare.search_star = data[0]
-				// 	this.prepare.search_runway = data[1]
-				// })
             }else{
                 this.clickSelfChart(JSON.parse(JSON.stringify(d)))
             }
@@ -2506,280 +1853,26 @@ export default {
         },
         clickSelfChart(d){
             this.chart.target_icao = d.icao
-            this.chart.all_data = {"user":true,"country_code":"CHN","country_name":"China, PR of","day_light_indicator":false,"elevation":0,"iata_code":"mull","icao_code":d.icao,"ifr_capability":true,"latitude":0,"longest_runway":0,"longitude":0,"magnetic_variation":-10,"name":"TAIPING","public_military_indicator":"C","serving_city":"HARBIN","time_zone":"H","presentation_text":d.label,"charts":0}
-            let id =  0
-            for (let i in d.children){
-                id++
-                let t = d.children[i]
-                switch (t.type) {
-                    case 'arpt':
-                        this.chart.arpt.push([{'user_chart':true,'cao_visibility':false,'file_day':t.data,'icao_airport_identifier':d.icao,'index_number':id,'procedure_identifier':t.label,'std_visibility':true,'type':{'session':'APT'}},id])
-                        break;
-                    case 'sid':
-                        this.chart.sid.push([{'user_chart':true,'cao_visibility':false,'file_day':t.data,'icao_airport_identifier':d.icao,'index_number':id,'procedure_identifier':t.label,'std_visibility':true,'type':{'session':'DEP'}},id])
-                        break;
-                    case 'star':
-                        this.chart.star.push([{'user_chart':true,'cao_visibility':false,'file_day':t.data,'icao_airport_identifier':d.icao,'index_number':id,'procedure_identifier':t.label,'std_visibility':true,'type':{'session':'ARR'}},id])
-                        break;
-                    case 'app':
-                        this.chart.app.push([{'user_chart':true,'cao_visibility':false,'file_day':t.data,'icao_airport_identifier':d.icao,'index_number':id,'procedure_identifier':t.label,'std_visibility':true,'type':{'session':'APP'}},id])
-                        break;
-                    case 'other':
-                        this.chart.other.push([{'user_chart':true,'cao_visibility':false,'file_day':t.data,'icao_airport_identifier':d.icao,'index_number':id,'procedure_identifier':t.label,'std_visibility':true,'type':{'session':'REF'}},id])
-                        break;
-                    default:
-                        this.chart.other.push([{'user_chart':true,'cao_visibility':false,'file_day':t.data,'icao_airport_identifier':d.icao,'index_number':id,'procedure_identifier':t.label,'std_visibility':true,'type':{'session':'REF'}},id])
-                        break;
-                }
-            }
-            $('#chart-list-load').css('display','none')
-            this.openChartList('arpt')
         },
         async exchangeToUrl(url){
           let result = await this.$axios.get(url)
           return result.data
         },
         clickChart(d,e){
-            for (let i = 0; i < this.vectorData.length; i++) {
-                this.vectorData[i].remove();
-            }
-            this.vectorData = [];
-            if (e){
-            let adiv = document.querySelectorAll(".main-display .items");
-            for (let i = 0; i < adiv.length; i++) {
-                adiv[i].setAttribute("class", "items");
-            }
-            let f = e.target
-            if (f.getAttribute("class") == "items") {
-                f.setAttribute("class", "items active");
-            } else if (f.parentNode.getAttribute("class") == "items") {
-                f.parentNode.setAttribute("class", "items active");
-            } else if (f.parentNode.parentNode.getAttribute("class") == "items") {
-                f.parentNode.parentNode.setAttribute("class", "items active");
-            }
-            }
-            $('#airport-chart-viewer').css('display','block')
-			$('.report-outer').css('left','70px')
-            $('.interact').css('display','block')
-			if ($('.nav-left-sidebar').css('display') != 'block'){
-				$('.nav-left-sidebar').css('display','block')
-			}
-            let c = d
             if (!c[0].user_chart){
                 //系统航图，不是用户航图
 				//this.$axios.get(`https://api.skylineflyleague.cn/efb_api/getChartUrl?tempToken=${this.api.temp}&targetChart=${c[0].file_day.replace('.png','')}&Airport=${c[0].icao_airport_identifier}&Access_Token=${this.Access_Token}&User_Certificate=${this.User_Certificate}&Singnature_Id=${this.Singnature_Id}&Temp_Key=${this.Temp_Key}&Expire_At=${localStorage.getItem('tempKeyExpireTime')}&verify=RSA_2048`).then(res =>{
 				this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/charturl?airport=${c[0].icao_airport_identifier}&cycle=${this.cycle.airac}&chart_name=${c[0].file_day.replace('.png','')}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
 					if (res.data == 'failed'){
 						return this.$message({
-							'type':'error',
-							'message':'航图加载失败，请重新加载'
-						})
-					}
+					'type':'error',
+				'message':'航图加载失败，请重新加载'
+			)
+		}
            for (let i = 0; i < this.vectorData.length; i++) {
                 this.vectorData[i].remove();
             }
             this.vectorData = [];
-					if (c[0].planview){
-					    //支持flight-link
-					    $("#link-warning").css('display','none')
-					    let B = this.getVectorBorder(d)
-						let A = this.L.latLngBounds([B._northEast.lat,this.fixLeafletLng(B._northEast.lng)],[B._southWest.lat,this.fixLeafletLng(B._southWest.lng)])
-					    let data = d
-						this.currentBorder = [[B._northEast.lat,this.fixLeafletLng(B._northEast.lng)],[B._southWest.lat,this.fixLeafletLng(B._southWest.lng)]]
-					    let t = data[0].type.section;
-					    let centerLatlngs = [
-					    (A._northEast.lat + A._southWest.lat) / 2,
-					    (A._northEast.lng + A._southWest.lng) / 2,
-					    ];
-					    this.chartWidth = A._northEast.lng - A._southWest.lng
-					    switch (t) {
-					    case "APT":
-					        this.map.setView(centerLatlngs, 14.5,{animate:false,duration:0});
-					        this.arpt_zoomlevel = "14.5";
-					        $('#erc').css('display','none')
-					        break;
-					    case "DEP":
-					        this.map.setView(centerLatlngs, 9,{animate:false,duration:0});
-					        this.arpt_zoomlevel = "9";
-					        $('#erc').css('display','block')
-					        break;
-					    case "ARR":
-					        this.map.setView(centerLatlngs, 9,{animate:false,duration:0});
-					        this.arpt_zoomlevel = "9";
-					        $('#erc').css('display','block')
-					        break;
-					    case "APP":
-					        this.map.setView(centerLatlngs, 10,{animate:false,duration:0});
-					        this.arpt_zoomlevel = "10";
-					        $('#erc').css('display','block')
-					        break;
-					
-					    default:
-					        this.map.setView(centerLatlngs, 9,{animate:false,duration:0});
-					        this.arpt_zoomlevel = "9";
-					        $('#erc').css('display','none')
-					        break;
-					    }
-					    let chartWidth = data[0].bbox_local[2];
-					    let logo_type = ''
-					    let lng_l = ''
-					    let lng_r = ''
-					    let lat_l = ''
-					    let lat_r = ''
-					    let left = []
-					    let right = []
-					    let warning_type = ''
-					    this.vectorData.push(
-					    this.L.imageOverlay(
-					        res.data,
-					        A
-					    )
-					    )
-					    //设置logo和文字
-					    //设置航图底部/左侧logo
-					    //if (A._southWest.lat > 0 && A._northEast.lng > 0 && A._northEast.lng < 180){
-					        //北半球、东半球
-					         if (data[0].bbox_local[1]>=data[0].bbox_local[2]){
-					    //竖版航图
-					    lng_l = A._southWest.lng
-					    lng_r = A._northEast.lng
-					    lat_l = A._southWest.lat+((A._northEast.lat - A._southWest.lat)/45)
-					    lat_r = A._southWest.lat
-					    logo_type = h_logo
-					    warning_type = h_warning
-					    this.vectorData.push(
-					        this.L.imageOverlay(
-					        h_logo,[[lat_l,lng_l],[lat_r,lng_r]]
-					        )
-					    )
-					    //把标语放到底部中央
-					    let height = ((A._northEast.lat - A._southWest.lat)/50)  //竖版航图的标语高度
-					    let width = (height/90)*1920  //宽度
-					    left = [
-					        A._southWest.lat+height,//纬度
-					        A._southWest.lng + (A._northEast.lng - A._southWest.lng - width)/2.4
-					    ]
-					    right = [
-					        A._southWest.lat,
-					        A._northEast.lng - (A._northEast.lng - A._southWest.lng - width)/2.4
-					    ]
-					    this.vectorData.push(
-					        this.L.imageOverlay(h_warning,[left,right])
-					    )
-					    }else{
-					    //横版航图
-					    lng_l = A._southWest.lng
-					    lng_r = A._southWest.lng+((A._northEast.lng - A._southWest.lng)/50)
-					    lat_l = A._northEast.lat
-					    lat_r = A._southWest.lat
-					    logo_type = v_logo
-					    warning_type = v_warning
-					    this.vectorData.push(
-					        this.L.imageOverlay(
-					        v_logo,[[lat_l,lng_l],[lat_r,lng_r]]
-					        )
-					    )
-					    let width = ((A._northEast.lng - A._southWest.lng)/60)
-					    let height = (width/90)*1920
-					    left = [
-					        A._northEast.lat - (A._northEast.lat - A._southWest.lat - height)/2,
-					        A._southWest.lng
-					    ]
-					    right = [
-					        A._southWest.lat + (A._northEast.lat - A._southWest.lat - height)/2,
-					        A._southWest.lng + width
-					    ]
-					    this.vectorData.push(
-					        this.L.imageOverlay(v_warning,[left,right])
-					    )
-					    }
-					    //}
-						// else if (A._southWest.lat < 0 && (A._northEast.lng < 0 || A._northEast.lng > 180)){
-						// 	//南半球，西半球
-						// }
-					   this.map.addLayer(this.L.layerGroup(this.vectorData))
-					}else{
-					    $("#link-warning").css('display','block')
-					    let chart_url = res.data
-					    let img = new Image();
-						this.currentBorder = []
-					    img.src = chart_url;
-					    img.onload = () => {
-					    this.width = img.width;
-					    this.height = img.height;
-					    let long_lat = parseFloat(this.height) / 1000;
-					    let long_lng = parseFloat(this.width) / 1000;
-					    let latlng2 = [
-					        [0, 0],
-					        [long_lat, long_lng],
-					    ];
-					    this.chartWidth = long_lng - long_lat
-					    this.map.setView([long_lat / 2, long_lng / 2], 9,{animate:false,duration:0});
-					    this.arpt_zoomlevel = "9";
-					    $('#erc').css('display','none')
-					    this.vectorData.push(
-					        this.L.imageOverlay(chart_url,[latlng2])
-					    )
-					    //设置航图底部/左侧logo
-					    let left = []
-					    let right = []
-					    if (long_lat >= long_lng){
-					    //竖版航图
-					    let lat_l = (long_lat/45) 
-					    let lng_l = 0
-					    let lat_r = 0
-					    let lng_r = long_lng
-					    this.vectorData.push(
-					        this.L.imageOverlay(
-					        h_logo,
-					        [[lat_l,lng_l],[lat_r,lng_r]]
-					    )
-					    )
-					    let height = lat_l //竖版航图的标语高度
-					    let width = (height/90)*1920  //宽度
-					    left = [
-					        height,
-					        (lng_r - width)/2
-					    ]
-					    right = [
-					        0,lng_r - (lng_r - width)/2
-					    ]
-					    this.vectorData.push(
-					        this.L.imageOverlay(h_warning,[left,right])
-					    )
-					    }else{
-					    //横版航图
-					    let lat_l = 0
-					    let lng_l = 0
-					    let lat_r = long_lat
-					    let lng_r = long_lng/45
-					    this.vectorData.push(
-					        this.L.imageOverlay(
-					        v_logo,
-					        [[lat_l,lng_l],[lat_r,lng_r]]
-					    )
-					    )
-					    let width = lng_r
-					    let height = (width/90)*1920
-					    left = [
-					        lat_l + (lat_r - height)/2.6,
-					        0
-					    ]
-					    right = [
-					        lat_r - (lat_r - height)/2.6,
-					        lng_r
-					    ]
-					    this.vectorData.push(
-					        this.L.imageOverlay(v_warning,[left,right])
-					    )
-					    }
-					    this.map.addLayer(this.L.layerGroup(this.vectorData))
-					    }
-					}
-				}).catch(()=>{
-          setTimeout(this.clickChart(d,e),800)
-				})
-                
             }else{
                 //用户自定义航图
                 this.showUserChart(d)
@@ -2824,21 +1917,6 @@ export default {
             this.preview.data = []
             $('#airport-chart-preview').css('display','none')
             $('.preview-float').css('display','block')
-          if (this.chart.target_type == '离场图'){
-					if (this.prepare.search_sid.length
-					&& this.prepare.search_runway.length){
-						this.preview.type = '离场'
-						this.preview.data = this.prepare.search_sid
-						this.preview.runway = this.prepare.search_runway
-					}else{
-						this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/airportData?airport=${this.chart.target_icao}&cycle=${this.cycle.airac}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(r =>{
-							let res = r.data.sqlBase64Data
-							this.preview.type = '离场'
-							this.preview.data = JSON.parse(dataDecrypt(res.sids))
-							this.preview.runway = JSON.parse(dataDecrypt(res.runways))
-						})
-					}
-        }else if (this.chart.target_type == '进场图'){
             if (this.prepare.search_star.length
             && this.prepare.search_runway.length){
               this.preview.type = '进场'
@@ -2851,8 +1929,7 @@ export default {
                 this.preview.data = JSON.parse(dataDecrypt(res.stars))
                 this.preview.runway = JSON.parse(dataDecrypt(res.runways))
               })
-            }
-					}else if (this.chart.target_type == '进近图'){
+            }}else if (this.chart.target_type == '进近图'){
             if (this.prepare.search_app.length && this.prepare.search_runway.length){
               this.preview.type = '进近'
               this.preview.data = this.prepare.search_app
@@ -2865,10 +1942,9 @@ export default {
                 this.preview.runway = JSON.parse(dataDecrypt(res.runways))
               })
             }
-          }
         },
-		showResult(){
-			$('#sub').html("数据查询中，请稍后 ... ")
+	showResult(){
+	    $('#sub').html("数据查询中，请稍后 ... ")
             $('#sub').css('cursor','not-allowed')
             if (
                 this.form.callsign == "" ||
@@ -2896,7 +1972,7 @@ export default {
             }
 		},
         getRoute(){
-			$('#route-data-load').css('display','block')
+	   $('#route-data-load').css('display','block')
             this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/route?dep=${this.form.dep.toUpperCase()}&arr=${this.form.arr.toUpperCase()}&cycle=${this.cycle.airac}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
             //this.$axios.get(`https://api.skylineflyleague.cn/efb_api/getRoute?tempToken=${this.api.temp}&Origin=${this.form.dep.toUpperCase()}&Arrival=${this.form.arr.toUpperCase()}&Access_Token=${this.Access_Token}&User_Certificate=${this.User_Certificate}&Singnature_Id=${this.Singnature_Id}&Temp_Key=${this.Temp_Key}&Expire_At=${localStorage.getItem('tempKeyExpireTime')}&verify=RSA_2048`).then(res =>{
                 this.route.searched = res.data
@@ -2913,104 +1989,6 @@ export default {
                 }
                 let data = JSON.parse(dataDecrypt(res.data.sqlBase64Data))
                 this.route.original = data
-                let eachRoute = []
-				        let routeData = []
-                this.route.dep.icao = data.departure.icao_code
-                this.route.dep.name = data.departure.name
-                this.route.dep.latlng = [data.departure.latitude,this.fixLeafletLng(data.departure.longitude)]
-                this.route.arr.icao = data.destination.icao_code
-                this.route.arr.name = data.destination.name
-                this.route.distance = data.route_distance.toFixed(1)
-                this.route.arr.latlng = [data.destination.latitude,this.fixLeafletLng(data.destination.longitude)]
-                eachRoute.push(
-                    {"label":data.departure.icao_code,"type":"arpt","latlngs":this.route.dep.latlng}
-                )
-				routeData.push(
-					{name:data.departure.icao_code,lat:data.departure.latitude,lng:data.departure.longitude}
-				)
-        if (data.expanded_route_items[0].item_data.airway_ident != 'DCT'){
-           eachRoute.push(
-                    {"label":"SID","type":"sid"}
-                )
-        }
-                for (let i = 0; i < data.expanded_route_items.length; i++){
-                    if (data.expanded_route_items[i].message){
-                        continue
-                    }
-                    if (!data.expanded_route_items[i].is_valid){
-                        continue
-                    }
-                    let d = data.expanded_route_items[i].item_data
-                    if (d.airway_ident){
-                        let along_route = []
-                        if (i == 0){
-                            along_route = [
-                                this.route.dep.latlng,
-                                [data.expanded_route_items[i+1].item_data.latitude,this.fixLeafletLng(data.expanded_route_items[i+1].item_data.longitude)]
-                            ]
-                        }else if (i == data.expanded_route_items.length - 1){
-                            along_route = [
-                                [data.expanded_route_items[i-1].item_data.latitude,this.fixLeafletLng(data.expanded_route_items[i-1].item_data.longitude)],
-                                this.route.arr.latlng
-                            ]
-                        }else{
-                            along_route = [
-                                [data.expanded_route_items[i-1].item_data.latitude,this.fixLeafletLng(data.expanded_route_items[i-1].item_data.longitude)],
-                                [data.expanded_route_items[i+1].item_data.latitude,this.fixLeafletLng(data.expanded_route_items[i+1].item_data.longitude)]
-                            ]
-                        }
-                        eachRoute.push(
-                            {"label":d.airway_ident,"type":"awy","latlngs":along_route}
-                        )
-                    }else if(d.object_type == 'waypoint'){
-                        eachRoute.push(
-                            {"label":d.presentation_text,"type":"wpt","latlngs":[d.latitude,this.fixLeafletLng(d.longitude)]}
-                        )
-						routeData.push(
-							{name:d.presentation_text,lat:d.latitude,lng:d.longitude}
-						)
-                    }else if (d.object_type == 'vhf_navaid'){
-                        eachRoute.push(
-                            {"label":d.ident,"type":"vor","latlngs":[d.latitude,this.fixLeafletLng(d.longitude)]}
-                        )
-						routeData.push(
-							{name:d.ident,lat:d.latitude,lng:d.longitude}
-						)
-                    }else if(d.object_type == 'ndb_navaid'){
-                        eachRoute.push(
-                            {"label":d.ident,"type":"ndb","latlngs":[d.latitude,this.fixLeafletLng(d.longitude)]}
-                        )
-						routeData.push(
-							{name:d.ident,lat:d.latitude,lng:d.longitude}
-						)
-                    }
-                }
-            let length_2 = data.expanded_route_items.length
-            if (data.expanded_route_items[length_2 - 1].item_data.airway_ident != 'DCT'){
-              eachRoute.push(
-                    {"label":"STAR","type":"star"}
-                )
-            }
-            eachRoute.push(
-                    {"label":"APP","type":"app"}
-                )
-                eachRoute.push(
-                    {"label":data.destination.icao_code,"type":"arpt","latlngs":this.route.arr.latlng}
-                )
-				routeData.push(
-					{name:data.destination.icao_code,lat:data.destination.latitude,lng:data.destination.longitude}
-				)
-                if (eachRoute[2].label == 'DCT'){
-                    eachRoute.splice(2,1)
-                }
-                let leng = eachRoute.length - 1
-                if (eachRoute[leng - 2] == 'DCT'){
-                    eachRoute.splice(leng-2,1)
-                }
-                this.route.eachRoute = eachRoute
-				        this.route.routeData = routeData
-                this.drawRouteData()
-				        this.saveTempRoute(this.route)
             })
         },
         drawRouteData(){
@@ -3085,60 +2063,19 @@ export default {
                         break;
                 }
             }
-			try{
-				let dep_latlngs = [
-				    this.route.eachRoute[0].latlngs,
-				    this.route.eachRoute[2].latlngs,
-				]
-				this.select.sidLayer.push(
-				    this.L.polyline(dep_latlngs,{
-				    color:'rgb(245,108,108)',
-				    opacity:0.5,
-				    weight:10
-				}))
-				let leng = this.route.eachRoute.length - 2
-				let arr_latlngs = [
-				    this.route.eachRoute[leng - 3].latlngs,
-				    this.route.eachRoute[leng].latlngs
-				]
-				this.select.starLayer.push(
-				    this.L.polyline(arr_latlngs,{
-				    color:'rgb(245,108,108)',
-				    opacity:0.5,
-				    weight:10
-				}))
-			}catch(e){
-				//TODO handle the exception
-			}
-      this.getAcftData()         
-			if (this.e_map == undefined){
-				setTimeout(()=> {
-					this.e_map.addLayer(this.L.layerGroup(this.routeLayer))
-					this.e_map.addLayer(this.L.layerGroup(this.select.starLayer))
-					this.e_map.addLayer(this.L.layerGroup(this.select.sidLayer))
-				}, 4000);
-			}else{
-				this.e_map.addLayer(this.L.layerGroup(this.routeLayer))
-				this.e_map.addLayer(this.L.layerGroup(this.select.starLayer))
-				this.e_map.addLayer(this.L.layerGroup(this.select.sidLayer))
-			}
-				this.addRoutePrepared()
+			
+        this.getAcftData()         
+	this.e_map.addLayer(this.L.layerGroup(this.routeLayer))
+	this.e_map.addLayer(this.L.layerGroup(this.select.starLayer))
+	this.e_map.addLayer(this.L.layerGroup(this.select.sidLayer))
+	this.addRoutePrepared()
         },
-		addRoutePrepared(){
-			this.prepare.route_runway = []
-			this.prepare.route_sid = []
-			this.prepare.route_star = []
-			//预存进离场数据
-			let rdata = this.route.eachRoute
-			this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/airportData?airport=${rdata[0].label}&cycle=${this.cycle.airac}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
-				this.prepare.route_sid = JSON.parse(dataDecrypt(res.data.sqlBase64Data.sids))
-				this.prepare.route_dep_runway = JSON.parse(dataDecrypt(res.data.sqlBase64Data.runways))
-			})
-			this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/airportData?airport=${rdata[rdata.length - 1].label}&cycle=${this.cycle.airac}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
-				this.prepare.route_star = JSON.parse(dataDecrypt(res.data.sqlBase64Data.stars))
-				this.prepare.route_arr_runway = JSON.parse(dataDecrypt(res.data.sqlBase64Data.runways))
-				this.prepare.route_arr_app = JSON.parse(dataDecrypt(res.data.sqlBase64Data.apps))
-			})
+	addRoutePrepared(){
+	    this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/airportData?airport=${rdata[rdata.length - 1].label}&cycle=${this.cycle.airac}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
+		this.prepare.route_star = JSON.parse(dataDecrypt(res.data.sqlBase64Data.stars))
+		this.prepare.route_arr_runway = JSON.parse(dataDecrypt(res.data.sqlBase64Data.runways))
+		this.prepare.route_arr_app = JSON.parse(dataDecrypt(res.data.sqlBase64Data.apps))
+	    })
 		},
         showWptDetail(d){
 			for (let i in this.clickLayer){
@@ -3239,15 +2176,15 @@ export default {
 				return this.$message.error(`似乎出了亿些微小的问题~`)
 			})
 		},
-		initTempRoute(){
-			if (!this.personalData.LastSyncedFlight) return
-			this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/currentSync?${new Date().getTime()}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
-				this.form = res.data.form
-				this.route = res.data.route
-				this.drawRouteData()
-				$('.report-outer').css('display','block')
-			})
-		},
+	initTempRoute(){
+	if (!this.personalData.LastSyncedFlight) return
+	this.$axios.get(`https://api.skylineflyleague.cn/efb_api_v2/currentSync?${new Date().getTime()}`,{headers:{'Authorization':`Bearer ${localStorage.getItem('access_token')}`}}).then(res =>{
+		this.form = res.data.form
+		this.route = res.data.route
+		this.drawRouteData()
+		$('.report-outer').css('display','block')
+	    })
+	},
     changeSelectTrans(){
       for (let i in this.select.appLayer){
         this.select.appLayer[i].remove()
@@ -3279,12 +2216,12 @@ export default {
       }
       this.e_map.addLayer(this.L.layerGroup(this.select.appLayer))
     },
-		changeSelectPro(){
+	changeSelectPro(){
 			let select = this.select.provalue
 			 //绘制图
 			 let geo_data = []
-			for (let i in this.select.data){
-			  if (this.select.data[i].identifier == select || this.select.data[i].presentation_text == select){
+	for (let i in this.select.data){
+		if (this.select.data[i].identifier == select || this.select.data[i].presentation_text == select){
           if (this.select.type == '进近'){
             for (let i in this.select.appLayer){
               this.select.appLayer[i].remove()
@@ -3362,17 +2299,17 @@ export default {
             }
             }
             break
-          }
+           }
           }
 			    
-			}
+	   }
 		},
 		changeSelectRwy(){
 			this.select.provalue = ''
       this.select.transvalue = ''
       this.select.trans = []
-			this.select.route = []
-			let runway = this.select.runwayvalue
+      this.select.route = []
+      let runway = this.select.runwayvalue
       this.select.transvalue = ''
       if (this.select.type == '进近'){
         //后期加入的进近程序
@@ -3435,7 +2372,7 @@ export default {
       }
           
 			
-		},
+	},
 		showSimlink(){
 			const Icon = L.icon({
 			  iconUrl: airplane,
@@ -3518,138 +2455,8 @@ export default {
 				}
 			},3200)
 		},
-		downloadData(filename, text) {
-		        let element = document.createElement('a');
-		        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-		        element.setAttribute('download', filename);
-		        element.click();
-		},
-		      //下载文件的函数
-		toCompanyRoute(type){
-		        switch (type) {
-		          case 'as320':
-		            let datastr = `[CoRte]
-ArptDep=${this.route.dep.icao}
-ArptArr=${this.route.arr.icao}
-`
-		      if (this.route.sid_word != 'SID'){
-		        datastr += `SID=${this.route.sid_word}
-`
-		      }
-		      if (this.route.star_word != 'STAR'){
-		        datastr +=  `STAR=${this.route.star_word}
-`
-		      }
-		      let awy_num = 1
-		      let routedata = this.route.searched.split(' ')
-		      for (let i = 0; i < routedata.length-1; i++){
-		        if (i == 1 || i%2 == 1){
-		          datastr += `Airway${awy_num}=${routedata[i].replace('STAR','DCT').replace('SID','DCT')}
-Airway${awy_num}FROM=${routedata[i-1]}
-Airway${awy_num}TO=${routedata[i+1]}
-`
-		 awy_num++
-		        }
-		       
-		      }
-		      this.downloadData(`${this.route.dep.icao}${this.route.arr.icao}01.flp`,datastr)
-		            break;
-		        
-		          
-		          case 'pmdg':
-		            
-		            let datastr2 = `Generated by SKYline EFB System
-		
-${this.route.routeData.length}
-`
-		let length = this.route.routeData.length-1
-		            datastr2 +=`
-${this.route.routeData[0].name}
-1
-DIRECT
-1 N ${parseFloat(this.route.routeData[0].lat).toFixed(3)} E ${parseFloat(this.route.routeData[0].lng).toFixed(3)} 100
------
-1
-0
-
-1
-12
--
--1000000
--1000000
-`
-		            for (let i = 1; i < this.route.routeData.length-1; i++){
-		              datastr2 +=`
-${this.route.routeData[i].name}
-5
-DIRECT
-1 N ${parseFloat(this.route.routeData[i].lat).toFixed(3)} E ${parseFloat(this.route.routeData[i].lng).toFixed(3)}
-0
-0
-0
-`
-		            }
-		            datastr2 +=`
-${this.route.routeData[length].name}
-1
-DIRECT
-1 N ${parseFloat(this.route.routeData[length].lat).toFixed(3)} E ${parseFloat(this.route.routeData[length].lng).toFixed(3)} 100
------
-1
-0
-
-1
-12
--
--1000000
--1000000
-`
-		            this.downloadData(`${this.route.dep.icao}${this.route.arr.icao}01.rte`,datastr2)
-		            break
-		
-		          case 'qw787':
-		            
-		            let length2 = this.route.routeData.length-1
-		            let datastr3 = `[FlightPlan]   
-`
-		            datastr3 += `${this.route.routeData[0].name}             ${this.route.routeData[0].lat}  ${this.route.routeData[0].lng}  APT ---
-`
-		            for (let i = 1; i < this.route.routeData.length-1 ; i ++){
-		              datastr3 += `${this.route.routeData[i].name}            ${this.route.routeData[i].lat}   ${this.route.routeData[i].lng}   WPT ---
-`
-		            }
-		            datastr3 += `${this.route.routeData[length2].name}             ${this.route.routeData[length2].lat}  ${this.route.routeData[length2].lng}  APT ---
-`
-		            this.downloadData(`${this.route.dep.icao}${this.route.arr.icao}01.RTE`,datastr3)
-		           break
-		
-		            case 'xp11':
-		              let length4 = this.route.routeData.length -1
-		              let datastr4 = `I
-1100 Version
-CYCLE ${this.cycle.airac}
-ADEP ${this.route.dep.icao}
-ADES ${this.route.arr.icao}
-NUMENR ${this.route.routeData.length}
-`
-		datastr4 += `1 ${this.route.dep.icao} ADEP 12.000000 ${this.route.routeData[0].lat} ${this.route.routeData[0].lng}
-`
-		              for (let i = 1; i < this.route.routeData.length-1; i++){
-		                datastr4 +=`11 ${this.route.routeData[i].name} DRCT 0.000000 ${this.route.routeData[i].lat} ${this.route.routeData[i].lng}
-`
-		              }
-		              datastr4 += `1 ${this.route.arr.icao} ADEP 12.000000 ${this.route.routeData[length4].lat} ${this.route.routeData[length4].lng}
-`
-		              this.downloadData(`${this.route.dep.icao}${this.route.arr.icao}01.fms`,datastr4)
-		              break
-		              case 'ff320':
-		                let datastr5 = `RTE ${this.route.searched.replace('STAR','DCT').replace('SID','DCT')}`
-		                this.downloadData(`${this.route.dep.icao}${this.route.arr.icao}01.in`,datastr5)
-		              break
-		                 default:
-		                break;
-		        //end switch
-		        }
+	downloadData(filename, text) {
+	// to updated       
 	},
 	},
     mounted(){
@@ -3659,23 +2466,7 @@ NUMENR ${this.route.routeData.length}
                         this.getCurrent()
                     })
         }
-        this.pubsub.subscribe('personalData',(name,data)=>{
-            this.personalData = data
-            this.user.arpt = data.airport
-            this.user.wpt = data.waypoint
-            this.user.awy = data.fixedJSONAirway
-            this.user.chart = data.charts
-				if (this.first_load){
-					this.first_load = false
-					this.initTempRoute()
-          this.showSimlink()
-					this.drawUserNavData(JSON.parse(JSON.stringify(this.user)))
-					this.addUserArptList()
-				}else{
-					this.drawUserNavData(JSON.parse(JSON.stringify(this.user)))
-					this.addUserArptList()
-				}
-        })
+        
         this.pubsub.subscribe('search',(name,data)=>{
             this.searchInfo(data)
         })
@@ -3684,20 +2475,6 @@ NUMENR ${this.route.routeData.length}
         })
     },
     watch:{
-        cycle:{
-            handler(val){
-                if (this.e_map == undefined && val != ''){
-                    this.$nextTick(()=>{
-                        this.getCurrent()
-                    })
-                }
-            }
-        },
-        user:{
-            handler(val){
-                this.drawUserNavData(JSON.parse(JSON.stringify(val)))
-            }
-        },
         chart_filter:{
             handler(val){
                 this.chart.select_filter = this.chart.select.filter(i => i[0].procedure_identifier.indexOf(val) != -1)
