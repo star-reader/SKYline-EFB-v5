@@ -114,23 +114,11 @@ export default {
             }
         },
         generateCertificate(){
-          let cert = {
-              certTime:new Date().getTime(),
-              domain:'https://efb.skylineflyleague.cn/',
-              functionalType:'account_chart_airport_enroute_navdata',
-              userCid:this.data.cid,
-              signed:this.data.password,
-              signature:getRandomString(48)
-          }
-          localStorage.setItem('user_certificate',tokenEncrypt(JSON.stringify(cert)))
+          localStorage.setItem('user_certificate','undefined')
         }
     },
     mounted(){
-      try {
         document.getElementById('load').style.display = 'none'
-      } catch (error) {
-        
-      }
     }
 }
 </script>
