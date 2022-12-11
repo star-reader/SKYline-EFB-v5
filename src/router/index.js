@@ -4,7 +4,6 @@ import Chart from '../pages/Chart'
 import Checklist from "../pages/Checklist"
 //import Enroute from "../pages/Enroute"
 import Other from "../pages/Other"
-import Personal from "../pages/Personal"
 import Supplement from "../pages/Supplement"
 import Develop from "../pages/Develop"
 import Login from '../components/Login'
@@ -67,11 +66,6 @@ export default new VueRouter({
             path:'/Other',
             name:'Other',
             component:Other
-        },
-        {
-            path:'/Personal',
-            name:'Personal',
-            component:Personal
         },
         {
             path:'/Supplement',
