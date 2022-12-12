@@ -161,19 +161,7 @@ export default {
     return {
         authorize_icon,
         navdata:'',
-        personalData:{
-                cid:'skyline',
-                email:null,
-                avatar: false,
-                authorizedUser:false,
-                authorizeText:null,
-                waypoint: false,
-                airway: false,
-                airport: false,
-                fixedJSONAirway: false,
-                charts: false,
-                LastSyncedFlight: false
-            },
+        personalData:{},
         search_word:''
     }
   },
@@ -258,31 +246,7 @@ export default {
         }
     },
     changeFile(e){
-    if (e.size > 2351601){
-      return this.$message({
-                    type: 'error',
-                    message: '文件大小过大'
-                  });  
-    }
-    if (e.type.indexOf('image/') == -1){
-      return this.$message({
-                    type: 'error',
-                    message: '请上传图片类型的文件'
-                  });  
-    }
-       this.$axios.post(`https://api.skylineflyleague.cn/efb/data/main/upload.php?username=${this.personalData.cid}`,e).then((res)=>{
-        if(res.data.code != 1000){
-          return this.$message({
-                    type: 'error',
-                    message: '上传失败'
-                  }); 
-        }
-        this.$message({
-                    type: 'success',
-                    message: '头像上传成功'
-                  }); 
-       })
-       document.querySelector('.upload').style.display = 'none'
+	// change file
     },
     changeAvatar(){
       document.querySelector('.upload').style.display = 'block'
