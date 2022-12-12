@@ -158,7 +158,7 @@ export default {
 
     props:['setWidth','cycle'],
   mounted() {
-	  this.token = getRandomString(24)
+    this.token = getRandomString(24) //随机字符串
     this.setWidth()
     this.initSUPData()
   },
