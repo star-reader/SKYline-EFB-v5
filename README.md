@@ -30,8 +30,6 @@ SKYline 电子飞行包最新版源代码(V5.3.2 最新版更新时间截止到2
 
 请将crypto中的加密密钥和偏移量替换为自己项目的，相应接口为https://api.skylineflyleague.cn/efb_api_v2/crypto/sign
 
-请注意产品使用合法性，部署打包上线时请确保阅读navigraph相应开发者文档并遵守其开发规定
-
-因为隐私原因已经删除涉及用户数据处理的personal.vue和对应路由/Personal
+请注意产品使用合法性，因为隐私原因已经删除涉及用户数据处理的personal.vue和对应路由/Personal
 
 因为隐私原因已经删除涉及用户登录与证书逻辑的部分
